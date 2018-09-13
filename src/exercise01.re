@@ -1,3 +1,43 @@
+type color =
+  | Black
+  | White;
+type row =
+  | One
+  | Two
+  | Three
+  | Four
+  | Five
+  | Six
+  | Seven
+  | Eight;
+type col =
+  | A
+  | B
+  | C
+  | D
+  | E
+  | F
+  | G
+  | H;
+type kind =
+  | Pawn
+  | Knight
+  | Bishop
+  | Rook
+  | King
+  | Queen;
+
+type chess = {
+  color,
+  kind,
+  position: (row, col),
+};
+
+let figures = [
+  {color: Black, kind: King, position: (One, A)},
+  {color: White, kind: Queen, position: (Three, A)},
+];
+
 let addAndStringify = (a, b) => string_of_int(a + b);
 
 /* Function that squares a number */

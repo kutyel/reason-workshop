@@ -161,6 +161,6 @@ switch (someList) {
 | [] => Js.log("Empty list")
 | [a] => Js.log("First value: " ++ string_of_int(a))
 | [_, ...b] =>
-  let sum = List.fold_left((+), 0, b) |> string_of_int;
+  let sum = Belt.List.reduce(b, 0, (+)) |> string_of_int;
   Js.log("Sum: " ++ sum);
 };
