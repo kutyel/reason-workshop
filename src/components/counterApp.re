@@ -1,29 +1,25 @@
-/* src/components/counterApp.re */
-
-type action = 
+type action =
   | Click
   | Reset;
 
-type state = {
-  count: int
-};
+type state = {count: int};
 
 let component = ReasonReact.reducerComponent("CounterApp");
 
-let make = (_children) => {
+let make = _children => {
   ...component,
-  initialState: () => { count: 0 },
-  reducer: (action, state) => switch(action) {
-    | Click => ReasonReact.Update({count: state.count + 1})
+  initialState: () => {count: 0},
+  reducer: (action, {count}) =>
+    switch (action) {
+    | Click => ReasonReact.Update({count: count + 1})
     | Reset => ReasonReact.Update({count: 0})
-  },
-  render: (self) => {
-    let message = "Clicked " ++ string_of_int(self.state.count) ++ " time(s)";
-    let onClick = (_event) => self.send(Click);
-    let onReset = (_event) => self.send(Reset);
+    },
+  render: ({state: {count}, send}) => {
+    let onClick = _e => send(Click);
+    let onReset = _e => send(Reset);
     <div>
-      {ReasonReact.string(message)}
+      {ReasonReact.string("Clicked " ++ string_of_int(count) ++ " time(s)")}
       <ClickerForm onClick onReset />
-    </div>
-  }
-}
+    </div>;
+  },
+};
